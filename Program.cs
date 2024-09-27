@@ -501,9 +501,25 @@ public static class Program
             string actionTaken = Console.ReadLine() ?? "";
 
             Console.WriteLine("Enter the pet ID:");
-            int petId = int.Parse(Console.ReadLine() ?? "");
+            string? petId = (Console.ReadLine() ?? "");
 
-            var pet = context.Pets.FirstOrDefault(c => c.PetId == petId);
+            // add input validation for if the id is not in the correct format
+            // keep prompting until they enter an integer
+            while (true)
+            {
+                if (!int.TryParse(petId, out int result))
+                {
+                    Console.WriteLine("Invalid input. Please enter a valid integer for the Pet ID.");
+                    petId = (Console.ReadLine() ?? "");
+                }
+                else
+                {
+                    break;
+                }
+                
+            }
+
+            var pet = context.Pets.FirstOrDefault(c => c.PetId == int.Parse(petId));
             if (pet == null)
             {
                 Console.WriteLine("Pet not found.");
@@ -535,7 +551,7 @@ public static class Program
                 ChiefComplaint = complaint,
                 Date = actualDate,
                 ActionTaken = actionTaken,
-                PetId = petId,
+                PetId = int.Parse(petId),
                 EmployeeId = employeeId,
                 ClinicId = clinicId
             };
