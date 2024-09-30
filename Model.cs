@@ -6,8 +6,11 @@ using Microsoft.EntityFrameworkCore;
 
 public class Clinic
 {
-    public int ClinicId { get; set; }
     [Required]
+    [MaxLength(100)]
+    public int ClinicId { get; set; } // consider giving clinicid and clinicname a "MaxLength"
+    [Required]
+    [MaxLength(100)]
     public string ClinicName { get; set; } = null!;
     [Required]
     [MaxLength(10)]
