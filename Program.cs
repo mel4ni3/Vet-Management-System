@@ -7,16 +7,21 @@ public static class Program
 {
     public static void Main()
     {
+        Console.Clear();
+
         // Begin interaction loop
         bool exit = false;
         while (!exit)
         {
-            Console.WriteLine("\nWelcome to Veterinary Clinic Management System, please make a selection: \n");
-            Console.WriteLine("1 - Add");
-            //Console.WriteLine("2    Update");
-            Console.WriteLine("2 - Delete");
-            Console.WriteLine("3 - View data.");
-            Console.WriteLine("q - Quit the application\n");
+            Console.WriteLine("\n|----------------------------------------------------------------|");
+            Console.WriteLine("| Welcome to Veterinary Clinic Management System. Please select: |");
+            Console.WriteLine("|----------------------------------------------------------------|");
+            Console.WriteLine("| 1 | ➕  ADD DATA                                               |");
+            //Console.WriteLine("2 | ✏️  UPDATE");
+            Console.WriteLine("| 2 | 🗑️  DELETE DATA                                            |");
+            Console.WriteLine("| 3 | 👁️  VIEW DATA                                              |");
+            Console.WriteLine("| Q | ❌  QUIT APPLICATION                                       |");
+            Console.WriteLine("|----------------------------------------------------------------|\n");
 
             var input = Console.ReadKey(intercept: true).Key;
             switch (input)
@@ -49,12 +54,12 @@ public static class Program
     // Function to display the Add menu
     public static void ShowAddMenu()
     {
-        Console.WriteLine("\nSelect an option to Add: ");
-        Console.WriteLine("1 - Add Employee");
-        Console.WriteLine("2 - Add Owner");
-        Console.WriteLine("3 - Add Pet");
-        Console.WriteLine("4 - Add Examination");
-        Console.WriteLine("5 - Add Clinic");
+        Console.WriteLine("\n[➕ ADD DATA] Please select: ");
+        Console.WriteLine("1 - 👥 Add Employee");
+        Console.WriteLine("2 - 🙍 Add Owner");
+        Console.WriteLine("3 - 🐶 Add Pet");
+        Console.WriteLine("4 - 😷 Add Examination");
+        Console.WriteLine("5 - 🏥 Add Clinic");
 
         var addInput = Console.ReadKey(intercept: true).Key;
         switch (addInput)
@@ -152,13 +157,16 @@ public static class Program
         bool exit = false;
         while (!exit)
         {
-            Console.WriteLine("\nView Data Menu:");
-            Console.WriteLine("1 - View Clinics");
-            Console.WriteLine("2 - View Employees");
-            Console.WriteLine("3 - View Owners");
-            Console.WriteLine("4 - View Pets");
-            Console.WriteLine("5 - View Examinations");
-            Console.WriteLine("q - Return to Main Menu");
+            Console.WriteLine("\n|---------------------------------------|");
+            Console.WriteLine("| What data would you like to view?:    |");
+            Console.WriteLine("|---------------------------------------|");
+            Console.WriteLine("| 1 | 🏥 Clinics                        |");
+            Console.WriteLine("| 2 | 👥 Employees                      |");
+            Console.WriteLine("| 3 | 🙍 Owners                         |");
+            Console.WriteLine("| 4 | 🐶 Pets                           |");
+            Console.WriteLine("| 5 | 😷 Examinations                   |");
+            Console.WriteLine("| Q | 🔙 Return to Main Menu            |");
+            Console.WriteLine("|---------------------------------------|\n");
 
             var input = Console.ReadKey(intercept: true).Key;
             switch (input)
@@ -192,11 +200,12 @@ public static class Program
     {
         using (var context = new VetDbContext())
         {
-            Console.WriteLine("\nClinics:");
+            Console.WriteLine("\n🏥 Clinics:");
             var clinics = context.Clinics.OrderBy(c => c.ClinicId).ToList();
             foreach (var clinic in clinics)
             {
-                Console.WriteLine($"{clinic.ClinicId}: {clinic.ClinicName} {clinic.PhoneNum}, Address: {clinic.Address}");
+                Console.WriteLine("---");
+                Console.WriteLine($"{clinic.ClinicId}: {clinic.ClinicName}\n Phone: {clinic.PhoneNum}\n Address: {clinic.Address}");
             }
         }
     }
@@ -205,11 +214,12 @@ public static class Program
     {
         using (var context = new VetDbContext())
         {
-            Console.WriteLine("\nEmployees:");
+            Console.WriteLine("\n👥 Employees:");
             var employees = context.Employees.Include(t => t.Clinic).OrderBy(t => t.EmployeeId).ToList();
             foreach (var employee in employees)
             {
-                Console.WriteLine($"{employee.EmployeeId}: {employee.FirstName} {employee.LastName}, Address: {employee.Address}, Phone #: {employee.EmployeePhone}, DOB: {employee.DOB}, Position: {employee.Position}, Clinic: {employee.Clinic?.ClinicName ?? "Unemployed"}, Salary: {employee.Salary}");
+                Console.WriteLine("---");
+                Console.WriteLine($"{employee.EmployeeId}: {employee.FirstName} {employee.LastName}\n Address: {employee.Address}\n Phone: {employee.EmployeePhone}\n DOB: {employee.DOB}\n Position: {employee.Position}\n Clinic: {employee.Clinic?.ClinicName ?? "Unemployed"}\n Salary: {employee.Salary}");
             }
         }
     }
@@ -218,11 +228,12 @@ public static class Program
     {
         using (var context = new VetDbContext())
         {
-            Console.WriteLine("\nOwners:");
+            Console.WriteLine("\n🙍 Owners:");
             var owners = context.Owners.Include(c => c.Clinic).OrderBy(e => e.OwnerId).ToList();
             foreach (var owner in owners)
             {
-                Console.WriteLine($"{owner.OwnerId}: {owner.FirstName} {owner.LastName}, Address: {owner.Address}, Phone #: {owner.OwnerPhone}, Clinic: {owner.Clinic?.ClinicName ?? "NA"}");
+                Console.WriteLine("---");
+                Console.WriteLine($"{owner.OwnerId}: {owner.FirstName} {owner.LastName}\n Address: {owner.Address}\n Phone: {owner.OwnerPhone}\n Clinic: {owner.Clinic?.ClinicName ?? "NA"}");
             }
         }
     }
@@ -231,11 +242,12 @@ public static class Program
     {
         using (var context = new VetDbContext())
         {
-            Console.WriteLine("\nPets:");
+            Console.WriteLine("\n🐶 Pets:");
             var pets = context.Pets.Include(s => s.Owner).Include(c => c.Clinic).OrderBy(s => s.PetId).ToList();
             foreach (var pet in pets)
             {
-                Console.WriteLine($"{pet.PetId}: {pet.Name}, Species: {pet.Species}, Breed: {pet.Breed}, Color: {pet.Color}, DOB: {pet.DOB}, Owner: {pet.Owner?.FirstName ?? "No Owner"}, Clinic: {pet.Clinic?.ClinicName ?? "NA"}");
+                Console.WriteLine("---");
+                Console.WriteLine($"{pet.PetId}: {pet.Name}\n Species: {pet.Species}\n Breed: {pet.Breed}\n Color: {pet.Color}\n DOB: {pet.DOB}\n Owner: {pet.Owner?.FirstName ?? "No Owner"}\n Clinic: {pet.Clinic?.ClinicName ?? "NA"}");
             }
         }
     }
@@ -244,14 +256,15 @@ public static class Program
     {
         using (var context = new VetDbContext())
         {
-            Console.WriteLine("\nExaminations:");
+            Console.WriteLine("\n😷 Examinations:");
             var exams = context.Examinations.Include(e => e.Pet)
                                             .Include(e => e.Employee)
                                             .Include(e => e.Clinic)
                                             .OrderBy(g => g.ExamId).ToList();
             foreach (var exam in exams)
             {
-                Console.WriteLine($"ExamId: {exam.ExamId}, Chief Complaint: {exam.ChiefComplaint}, Action Taken:  {exam.ActionTaken}, Date: {exam.Date}, Pet Name: {exam.Pet.Name}, Employee Name: {exam.Employee.FirstName} {exam.Employee.LastName}, Clinic: {exam.Clinic?.ClinicName}");
+                Console.WriteLine("---");
+                Console.WriteLine($"ExamId: {exam.ExamId}\n Chief Complaint: {exam.ChiefComplaint}\n Action Taken:  {exam.ActionTaken}\n Date: {exam.Date}\n Pet Name: {exam.Pet.Name}\n Employee Name: {exam.Employee.FirstName} {exam.Employee.LastName}\n Clinic: {exam.Clinic?.ClinicName}");
             }
         }
     }
