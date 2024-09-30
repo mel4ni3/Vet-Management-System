@@ -54,12 +54,16 @@ public static class Program
     // Function to display the Add menu
     public static void ShowAddMenu()
     {
-        Console.WriteLine("\n[➕ ADD DATA] Please select: ");
-        Console.WriteLine("1 - 👥 Add Employee");
-        Console.WriteLine("2 - 🙍 Add Owner");
-        Console.WriteLine("3 - 🐶 Add Pet");
-        Console.WriteLine("4 - 😷 Add Examination");
-        Console.WriteLine("5 - 🏥 Add Clinic");
+        Console.WriteLine("\n|---------------------------------------|");
+        Console.WriteLine("| [➕ ADD DATA] Please select:         |");
+        Console.WriteLine("|---------------------------------------|");
+        Console.WriteLine("| 1 | 👥 Employee                       |");
+        Console.WriteLine("| 2 | 🙍 Owner                          |");
+        Console.WriteLine("| 3 | 🐶 Pet                            |");
+        Console.WriteLine("| 4 | 😷 Examination                    |");
+        Console.WriteLine("| 5 | 🏥 Clinic                         |");
+        //Console.WriteLine("| Q | 🔙 Return to Main Menu            |");
+        Console.WriteLine("|---------------------------------------|\n");
 
         var addInput = Console.ReadKey(intercept: true).Key;
         switch (addInput)
@@ -85,39 +89,39 @@ public static class Program
         }
     }
 
-    // Function to display the Update menu
-    public static void ShowUpdateMenu()
-    {
-        Console.WriteLine("\nSelect an option to Update: ");
-        Console.WriteLine("1 - Update Employee");
-        Console.WriteLine("2 - Update Owner");
-        Console.WriteLine("3 - Update Pet");
-        Console.WriteLine("4 - Update Examination");
-        Console.WriteLine("5 - Update Clinic");
+    //// Function to display the Update menu
+    //public static void ShowUpdateMenu()
+    //{
+    //    Console.WriteLine("\nSelect an option to Update: ");
+    //    Console.WriteLine("1 - Update Employee");
+    //    Console.WriteLine("2 - Update Owner");
+    //    Console.WriteLine("3 - Update Pet");
+    //    Console.WriteLine("4 - Update Examination");
+    //    Console.WriteLine("5 - Update Clinic");
 
-        var updateInput = Console.ReadKey(intercept: true).Key;
-        switch (updateInput)
-        {
-            case ConsoleKey.D1:
-                //UpdateEmployee();
-                break;
-            case ConsoleKey.D2:
-                //UpdateOwner();
-                break;
-            case ConsoleKey.D3:
-                //UpdatePet();
-                break;
-            case ConsoleKey.D4:
-                //UpdateExamination();
-                break;
-            case ConsoleKey.D5:
-                //UpdateClinic();
-                break;
-            default:
-                Console.WriteLine("\nInvalid selection. Try again.");
-                break;
-        }
-    }
+    //    var updateInput = Console.ReadKey(intercept: true).Key;
+    //    switch (updateInput)
+    //    {
+    //        case ConsoleKey.D1:
+    //            //UpdateEmployee();
+    //            break;
+    //        case ConsoleKey.D2:
+    //            //UpdateOwner();
+    //            break;
+    //        case ConsoleKey.D3:
+    //            //UpdatePet();
+    //            break;
+    //        case ConsoleKey.D4:
+    //            //UpdateExamination();
+    //            break;
+    //        case ConsoleKey.D5:
+    //            //UpdateClinic();
+    //            break;
+    //        default:
+    //            Console.WriteLine("\nInvalid selection. Try again.");
+    //            break;
+    //    }
+    //}
 
     // Function to display the Delete menu
     public static void ShowDeleteMenu()
@@ -158,7 +162,7 @@ public static class Program
         while (!exit)
         {
             Console.WriteLine("\n|---------------------------------------|");
-            Console.WriteLine("| What data would you like to view?:    |");
+            Console.WriteLine("| [👁️ VIEW DATA] Please select:         |");
             Console.WriteLine("|---------------------------------------|");
             Console.WriteLine("| 1 | 🏥 Clinics                        |");
             Console.WriteLine("| 2 | 👥 Employees                      |");
@@ -348,7 +352,10 @@ public static class Program
 
             context.Clinics.Add(clinic);
             context.SaveChanges();
-            Console.WriteLine("Clinic added successfully.");
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("✅ Clinic added successfully.");
+            Console.ForegroundColor = ConsoleColor.White;
         }
     }
 
@@ -400,7 +407,10 @@ public static class Program
 
             context.Employees.Add(employee);
             context.SaveChanges();
-            Console.WriteLine("Employee added successfully.");
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("✅ Employee added successfully.");
+            Console.ForegroundColor = ConsoleColor.White;
         }
     }
 
@@ -440,7 +450,10 @@ public static class Program
 
             context.Owners.Add(owner);
             context.SaveChanges();
-            Console.WriteLine("Owner added successfully.");
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("✅ Owner added successfully.");
+            Console.ForegroundColor = ConsoleColor.White;
         }
     }
 
@@ -495,7 +508,10 @@ public static class Program
 
             context.Pets.Add(pet);
             context.SaveChanges();
-            Console.WriteLine("Pet added successfully.");
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("✅ Pet added successfully.");
+            Console.ForegroundColor = ConsoleColor.White;
         }
     }
 
@@ -571,83 +587,13 @@ public static class Program
 
             context.Examinations.Add(examination);
             context.SaveChanges();
+
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Examinations added successfully.");
+            Console.ForegroundColor = ConsoleColor.White;
         }
         }
-        //public static void ViewData()
-        //{
-        //    using (var context = new VetDbContext())
-        //    {
-        //        //// Display Clinic
-        //        Console.WriteLine("\nClinics:");
-        //        var clinics = context.Clinics
-        //                            .OrderBy(c => c.ClinicId)
-        //                            .ToList();
-
-        //        foreach (var clinic in clinics)
-        //        {
-        //            Console.WriteLine($"{clinic.ClinicId}: {clinic.ClinicName} {clinic.PhoneNum}, Adress: {clinic.Address}");
-        //        }
-
-        //        // Display Employeees
-        //        Console.WriteLine("\nEmployees:");
-        //        var employees = context.Employees
-        //                            .Include(t => t.Clinic)  // Include Department for Teachers
-        //                            .OrderBy(t => t.EmployeeId)
-        //                            .ToList();
-
-        //        foreach (var employee in employees)
-        //        {
-        //            Console.WriteLine($"{employee.EmployeeId}: {employee.FirstName} {employee.LastName}, Address: {employee.Address}, Phone #: {employee.EmployeePhone}, DOB: {employee.DOB}, Position: {employee.Position}, Clinic: {employee.Clinic?.ClinicName ?? "Unemployed"}, Salary: {employee.Salary}");
-        //        }
-
-        //        // Display Owner
-        //        Console.WriteLine("\nOwner:");
-        //        var owners = context.Owners
-        //                            .Include(c => c.Clinic)  // Include Department for Courses
-        //                                                     //.Include(c => c.Teachers)Clinic// Include Teachers for each Course
-        //                            .OrderBy(e => e.OwnerId)
-        //                            .ToList();
-
-        //        foreach (var owner in owners)
-        //        {
-        //            Console.WriteLine($"{owner.OwnerId}: {owner.FirstName} {owner.LastName}, Address: {owner.Address}, Phone #: {owner.OwnerPhone}, Clinic: {owner.Clinic?.ClinicName ?? "NA"}");
-        //        }
-
-        //        // Display Pets
-
-        //        Console.WriteLine("\nPets:");
-        //        var pets = context.Pets
-        //                            .Include(s => s.Owner)
-        //                            .Include(c => c.Clinic)
-        //                            .OrderBy(s => s.PetId)
-        //                            .ToList();
-
-        //        foreach (var pet in pets)
-        //        {
-        //            Console.WriteLine($"{pet.PetId}: {pet.Name}, Species: {pet.Species}, Breed: {pet.Breed}, Color: {pet.Color}, DOB: {pet.DOB}, Owner: {pet.Owner?.FirstName ?? "No Owner"}, Clinic: {pet.Clinic?.ClinicName ?? "NA"}");
-        //        }
-
-        //        // Display Examinations
-        //        Console.WriteLine("\nExaminations:");
-        //        var exams = context.Examinations
-        //                            .Include(e => e.Pet)     // Include Pet for each Examination
-        //                            .Include(e => e.Employee) // Include Employee for each Examination
-        //                            .Include(e => e.Clinic)  // // Include Clinic for each Examination
-        //                            .OrderBy(g => g.ExamId)
-        //                            .ToList();
-
-        //        foreach (var exam in exams)
-        //        {
-        //            Console.WriteLine($"ExamId: {exam.ExamId}, Chief Complaint: {exam.ChiefComplaint}, Action Taken:  {exam.ActionTaken}, Date: {exam.Date}, Pet ID: {exam.PetId}, Pet Name: {exam.Pet.Name}, Employee ID: {exam.EmployeeId}, Employee Name: {exam.Employee.FirstName + " " + exam.Employee.LastName}, Clinic ID: {exam.ClinicId}");
-        //        }
-
-
-        //    }
-        //}
-
-
-
+  
         // ############ DELETES ############
         public static void DeletePet()
     {
@@ -827,13 +773,4 @@ public static class Program
             }
         }
     }
-
-
-
-
-
-
-    // ############ UPDATES ############
-
 }
-
