@@ -11,38 +11,45 @@ namespace Vet_Management_Tool
         // Function to display the ADD MENU
         public static void ShowAddMenu()
         {
-            Console.WriteLine("\n|---------------------------------------|");
-            Console.WriteLine("| [➕ ADD DATA] Please select:          |");
-            Console.WriteLine("|---------------------------------------|");
-            Console.WriteLine("| 1 | 👥 Employee                       |");
-            Console.WriteLine("| 2 | 🙍 Owner                          |");
-            Console.WriteLine("| 3 | 🐶 Pet                            |");
-            Console.WriteLine("| 4 | 😷 Examination                    |");
-            Console.WriteLine("| 5 | 🏥 Clinic                         |");
-            //Console.WriteLine("| Q | 🔙 Return to Main Menu            |");
-            Console.WriteLine("|---------------------------------------|\n");
-
-            var addInput = Console.ReadKey(intercept: true).Key;
-            switch (addInput)
+            bool exit = false;
+            while (!exit)
             {
-                case ConsoleKey.D1:
-                    Add.AddEmployee();
-                    break;
-                case ConsoleKey.D2:
-                    Add.AddOwner();
-                    break;
-                case ConsoleKey.D3:
-                    Add.AddPet();
-                    break;
-                case ConsoleKey.D4:
-                    Add.AddExamination();
-                    break;
-                case ConsoleKey.D5:
-                    Add.AddClinic();
-                    break;
-                default:
-                    Console.WriteLine("\nInvalid selection. Try again.");
-                    break;
+                Console.WriteLine("\n|---------------------------------------|");
+                Console.WriteLine("| [➕ ADD DATA] Please select:          |");
+                Console.WriteLine("|---------------------------------------|");
+                Console.WriteLine("| 1 | 👥 Employee                       |");
+                Console.WriteLine("| 2 | 🙍 Owner                          |");
+                Console.WriteLine("| 3 | 🐶 Pet                            |");
+                Console.WriteLine("| 4 | 😷 Examination                    |");
+                Console.WriteLine("| 5 | 🏥 Clinic                         |");
+                Console.WriteLine("| Q | 🔙 Return to Main Menu            |");
+                Console.WriteLine("|---------------------------------------|\n");
+
+                var addInput = Console.ReadKey(intercept: true).Key;
+                switch (addInput)
+                {
+                    case ConsoleKey.D1:
+                        Add.AddEmployee();
+                        break;
+                    case ConsoleKey.D2:
+                        Add.AddOwner();
+                        break;
+                    case ConsoleKey.D3:
+                        Add.AddPet();
+                        break;
+                    case ConsoleKey.D4:
+                        Add.AddExamination();
+                        break;
+                    case ConsoleKey.D5:
+                        Add.AddClinic();
+                        break;
+                    case ConsoleKey.Q:
+                        exit = true;
+                        break;
+                    default:
+                        Console.WriteLine("\nInvalid selection. Try again.");
+                        break;
+                }
             }
         }
 
@@ -51,44 +58,45 @@ namespace Vet_Management_Tool
         // Function to display the DELETE MENU
         public static void ShowDeleteMenu()
         {
-            Console.WriteLine("\nSelect an option to Delete: ");
-            Console.WriteLine("1 - Delete Employee");
-            Console.WriteLine("2 - Delete Owner");
-            Console.WriteLine("3 - Delete Pet");
-            Console.WriteLine("4 - Delete Examination");
-            Console.WriteLine("5 - Delete Clinic");
-
-            Console.WriteLine("\n|---------------------------------------|");
-            Console.WriteLine("| [🗑️ DELETE DATA] Please select:       |");
-            Console.WriteLine("|---------------------------------------|");
-            Console.WriteLine("| 1 | 👥 Employee                       |");
-            Console.WriteLine("| 2 | 🙍 Owner                          |");
-            Console.WriteLine("| 3 | 🐶 Pet                            |");
-            Console.WriteLine("| 4 | 😷 Examination                    |");
-            Console.WriteLine("| 5 | 🏥 Clinic                         |");
-            Console.WriteLine("|---------------------------------------|\n");
-
-            var deleteInput = Console.ReadKey(intercept: true).Key;
-            switch (deleteInput)
+            bool exit = false;
+            while (!exit)
             {
-                case ConsoleKey.D1:
-                    Delete.DeleteEmployee();
-                    break;
-                case ConsoleKey.D2:
-                    Delete.DeleteOwner();
-                    break;
-                case ConsoleKey.D3:
-                    Delete.DeletePet();
-                    break;
-                case ConsoleKey.D4:
-                    Delete.DeleteExamination();
-                    break;
-                case ConsoleKey.D5:
-                    Delete.DeleteClinic();
-                    break;
-                default:
-                    Console.WriteLine("\nInvalid selection. Try again.");
-                    break;
+                Console.WriteLine("\n|---------------------------------------|");
+                Console.WriteLine("| [🗑️ DELETE DATA] Please select:       |");
+                Console.WriteLine("|---------------------------------------|");
+                Console.WriteLine("| 1 | 👥 Employee                       |");
+                Console.WriteLine("| 2 | 🙍 Owner                          |");
+                Console.WriteLine("| 3 | 🐶 Pet                            |");
+                Console.WriteLine("| 4 | 😷 Examination                    |");
+                Console.WriteLine("| 5 | 🏥 Clinic                         |");
+                Console.WriteLine("| Q | 🔙 Return to Main Menu            |");
+                Console.WriteLine("|---------------------------------------|\n");
+
+                var deleteInput = Console.ReadKey(intercept: true).Key;
+                switch (deleteInput)
+                {
+                    case ConsoleKey.D1:
+                        Delete.DeleteEmployee();
+                        break;
+                    case ConsoleKey.D2:
+                        Delete.DeleteOwner();
+                        break;
+                    case ConsoleKey.D3:
+                        Delete.DeletePet();
+                        break;
+                    case ConsoleKey.D4:
+                        Delete.DeleteExamination();
+                        break;
+                    case ConsoleKey.D5:
+                        Delete.DeleteClinic();
+                        break;
+                    case ConsoleKey.Q:
+                        exit = true;
+                        break;
+                    default:
+                        Console.WriteLine("\nInvalid selection. Try again.");
+                        break;
+                }
             }
         }
 
